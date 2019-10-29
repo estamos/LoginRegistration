@@ -43,8 +43,10 @@ public class ProcessLogin extends HttpServlet {
 			boolean authenticate=dao.authenticate(username, password);
 			if(authenticate) {
 				session.setAttribute("username", username);
-				rd.forward(request, response);
-				
+				rd.forward(request, response);	
+			}
+			else {
+				out.println("Invalid username or password.");
 			}
 		} catch (Exception e) {
 			out.println("Your request cannot be processed at this time, please try later.");

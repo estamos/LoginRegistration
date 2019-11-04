@@ -45,15 +45,15 @@ public class ProcessRegistration extends HttpServlet {
 		try {
 			boolean isExist=dao.isExist(username);
 			if(isExist) {
-				out.println("User with username "+username+" already exist.");
+				out.println("User with username "+username+" already exists.");
 				rd1.include(request, response);
 			}else {
 				if(!password.equals(confirmPass)) {
-					out.println("Password and confirm password not match");
+					out.println("Password and confirm password not match.");
 					rd1.include(request, response);
 				}else {
 					dao.registerUser(firstname, lastname, username, password);
-					out.println("User Registered successfully");
+					out.println("User Registered successfully.");
 					rd2.include(request, response);
 				}
 			}

@@ -58,8 +58,7 @@ public class ProcessRegistration extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			//e.printStackTrace(out);
-			out.println("<span style='color:red'>Your request cannot be processed at this time please try after some time</span>");
+			out.println("Your request cannot be processed at this time, please try later.");
 		}
 		
 	}

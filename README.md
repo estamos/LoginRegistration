@@ -1,4 +1,4 @@
-# Web app with Login and Register functionality
+# Web app with Login and Registration functionality
 
 CE426 World Wide Web Technologies | UTH
 

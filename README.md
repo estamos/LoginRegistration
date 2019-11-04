@@ -4,6 +4,9 @@ CE426 World Wide Web Technologies | UTH
 
 [Web application](http://83.212.111.93:8080/estamos)
 
+## Note
+If the web application is not working probably the virtual machine is not running .
+
 ## Info
 In this repo, it is provided the code to create a Web app deployed on a virtual machine hosted at [GRNET's cloud service | ~okeanos](https://okeanos.grnet.gr) with Registration and Login functionality for users using :
 

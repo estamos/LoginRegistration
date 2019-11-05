@@ -45,20 +45,20 @@ public class ProcessRegistration extends HttpServlet {
 		try {
 			boolean isExist=dao.isExist(username);
 			if(isExist) {
-				out.println("User with username "+username+" already exists.");
 				rd1.include(request, response);
+				out.println("<span style='color:red'>User with username "+username+" already exists.</span>");
 			}else {
 				if(!password.equals(confirmPass)) {
-					out.println("Password and confirm password not match.");
 					rd1.include(request, response);
+					out.println("<span style='color:red'>Password and confirm password do not match.</span>");
 				}else {
 					dao.registerUser(firstname, lastname, username, password);
-					out.println("User Registered successfully.");
 					rd2.include(request, response);
+					out.println("<span style='color:green'>User Registered successfully</span>");
 				}
 			}
 		} catch (Exception e) {
-			out.println("Your request cannot be processed at this time, please try later.");
+			out.println("<span style='color:red'>Your request cannot be processed | the web application is not working properly , probably the virtual machine or MySQL database is not running.</span>");
 		}
 		
 	}

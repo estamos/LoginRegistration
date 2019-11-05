@@ -48,10 +48,15 @@ public class ProcessRegistration extends HttpServlet {
 				rd1.include(request, response);
 				out.println("<span style='color:red'>User with username "+username+" already exists.</span>");
 			}else {
-				if(!password.equals(confirmPass)) {
+				if(username.equals("") | password.equals("")) {
 					rd1.include(request, response);
-					out.println("<span style='color:red'>Password and confirm password do not match.</span>");
-				}else {
+					out.println("<span style='color:red'>Username and Password should not be null.</span>");
+				}
+				else if(!password.equals(confirmPass)) {
+					rd1.include(request, response);
+					out.println("<span style='color:red'>Password and Confirm Password do not match.</span>");
+				}
+				else {
 					dao.registerUser(firstname, lastname, username, password);
 					rd2.include(request, response);
 					out.println("<span style='color:green'>User Registered successfully</span>");

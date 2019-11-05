@@ -34,8 +34,8 @@ public class Logout extends HttpServlet {
 		session.removeAttribute("username");
 		RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
 		PrintWriter out=response.getWriter();
-		out.println("You logged out successfully.");
 		rd.include(request, response);
+		out.println("<span style='color:red'>You logged out successfully</span>");
 	}
 
 }

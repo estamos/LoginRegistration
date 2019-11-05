@@ -38,18 +38,20 @@ public class ProcessLogin extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		
 		UserDao dao=new UserDao();
-		RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");
+		RequestDispatcher rd1=request.getRequestDispatcher("Home.jsp");
+		RequestDispatcher rd2=request.getRequestDispatcher("login.jsp");
 		try {
 			boolean authenticate=dao.authenticate(username, password);
 			if(authenticate) {
 				session.setAttribute("username", username);
-				rd.forward(request, response);	
+				rd1.forward(request, response);	
 			}
 			else {
-				out.println("Invalid username or password.");
+				rd2.include(request, response);
+				out.println("<span style='color:red'>Invalid username or password.</span>");
 			}
 		} catch (Exception e) {
-			out.println("Your request cannot be processed at this time, please try later.");
+			out.println("<span style='color:red'>Your request cannot be processed | the web application is not working properly , probably the virtual machine or MySQL database is not running.</span>");
 		}
 	}
 

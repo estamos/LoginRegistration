@@ -15,8 +15,12 @@
   </head>
   <body>
   <%
-  out.println("<h1>Welcome "+session.getAttribute("username")+"</h1>");
-  out.println("<a href='"+request.getContextPath()+"/logout'>Logout</a>");
+  if(session.getAttribute("username")==null){
+	  out.println("You are not logged in");
+  }else{
+	  out.println("<h1>Welcome "+session.getAttribute("username")+"</h1>");
+	  out.println("<a href='"+request.getContextPath()+"/logout'>Logout</a>");
+  }
   %>
     
 

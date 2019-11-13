@@ -18,7 +18,7 @@
 <title>Register</title>
 </head>
 <body>
-	<h1>Register</h1>
+	<h1>Register | Hibernate JPA Layer Implementation</h1>
 	<form action="processRegistration" method="post">
 		<table class="table table-striped table-responsive">
 			<tr>

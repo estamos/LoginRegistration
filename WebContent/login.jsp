@@ -18,7 +18,7 @@
 <title>Login</title>
 </head>
 <body>
-	<h1>Login</h1>
+	<h1>Login | Hibernate JPA Layer Implementation</h1>
 	<form action="processLogin" method="POST">
 		<table class="table table-responsive table-striped">
 			<tr>

@@ -1,56 +1,88 @@
 package com.mk.dao;
 
-import java.sql.ResultSet;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
-import com.mk.util.DBUtil;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
+
+import com.mk.bean.User;
 
 public class UserDao {
-	public void registerUser(String firstname,String lastname,String username,String password) throws Exception {
-		String sql="insert into users(firstname,lastname,username,password) "
-				+ "values('"+firstname+"','"+lastname+"','"+username+"','"+password+"')";
-		DBUtil.executeUpdate(sql);
-		
-	}
 	
-	public boolean authenticate(String username,String password) throws Exception {
-		boolean authenticated=false;
-		String sql="select username,password,count(username) as count from users "
-				+ "where username='"+username+"' and password='"+password+"'";
-		ResultSet rs=DBUtil.executeQuery(sql);
-		while(rs.next()) {
-			int count=rs.getInt("count");
-			if(count>0) {
-				String user=rs.getString("username");
-				String pass=rs.getString("password");
-				if(user.equals(username) && pass.equals(password)) {
-					authenticated=true;
-					
-				}else {
-					authenticated=false;
-				}
-			}else {
-				authenticated=false;
-			}
-			
-		}
-		
-		return authenticated;
-		
-		
-	}
+	private boolean flag=true;
+	private Session session;
 	
-	public boolean isExist(String username) throws Exception {
-		boolean exist=false;
-		String sql="select count(username) as count from users where username='"+username+"'";
-		ResultSet rs=DBUtil.executeQuery(sql);
-		while(rs.next()) {
-			int count=rs.getInt("count");
-			if(count > 0) {
-				exist=true;
-			}
-		}
-		return exist;
-		
-	}
+	private Session Start() {
+		if(flag) {
+			StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+			Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+			SessionFactory sessionFactory = metaData.getSessionFactoryBuilder().build();
+	
+	        session = sessionFactory.getCurrentSession();
+	        session.beginTransaction();
 
+	        flag=false;
+		}
+	        
+        return session;
+	}
+	
+	public void registerUser(String firstname,String lastname,String username,String password) throws Exception {
+		Session session = Start();
+
+        User user = new User();
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setUsername(username);
+        user.setPassword(password);
+
+        session.save(user);
+        session.getTransaction().commit();
+		
+	}
+	
+	public boolean authenticate(String username, String password) throws Exception {
+        Session session = Start();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query.select(root);
+        Query<User> q = session.createQuery(query);
+        List<User> list = q.getResultList();
+
+        for(User user: list) {
+        	if(user.getUsername().equals(username))
+        		return user.getPassword().equals(password);
+        }
+        
+		return false;
+	}
+	
+	public boolean isExist(String username) throws Exception {		
+        Session session = Start();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query.select(root);
+        Query<User> q = session.createQuery(query);
+        List<User> list = q.getResultList();
+
+        for(User user: list) {
+        	if(user.getUsername().equals(username))
+        		return true;
+        }
+        
+		return false;
+	}
 }

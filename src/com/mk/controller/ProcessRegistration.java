@@ -63,6 +63,7 @@ public class ProcessRegistration extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
+			//e.printStackTrace(out);
 			out.println("<span style='color:red'>Your request cannot be processed | the web application is not working properly , probably the virtual machine or MySQL database is not running.</span>");
 		}
 		

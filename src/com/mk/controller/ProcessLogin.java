@@ -1,14 +1,14 @@
 package com.mk.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+ 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 import com.mk.dao.UserDao;
@@ -40,6 +40,7 @@ public class ProcessLogin extends HttpServlet {
 		UserDao dao=new UserDao();
 		RequestDispatcher rd1=request.getRequestDispatcher("Home.jsp");
 		RequestDispatcher rd2=request.getRequestDispatcher("login.jsp");
+
 		try {
 			boolean authenticate=dao.authenticate(username, password);
 			if(authenticate) {
@@ -50,6 +51,7 @@ public class ProcessLogin extends HttpServlet {
 				rd2.include(request, response);
 				out.println("<span style='color:red'>Invalid username or password.</span>");
 			}
+	
 		} catch (Exception e) {
 			out.println("<span style='color:red'>Your request cannot be processed | the web application is not working properly , probably the virtual machine or MySQL database is not running.</span>");
 		}

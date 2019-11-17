@@ -1,32 +1,25 @@
 package com.mk.bean;
 
-public class User {
-	private int id;
-	private String firstname;
-	private String lastname;
-	private String username;
-	private String password;
-	
-	public User() {
-		
-	}
+import java.io.Serializable;
+import javax.persistence.*;
 
-	public User(String firstname, String lastname, String username, String password) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
-	}
-
-	public User(int id, String firstname, String lastname, String username, String password) {
-		super();
-		this.id = id;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
-	}
+@Entity
+@Table(name="users")
+public class User implements Serializable {
+     
+    private static final long serialVersionUID = 1L;
+     
+    @Id
+    @Column(name="id")
+    private int id;
+    @Column(name="firstname")
+    private String firstname;
+    @Column(name="lastname")
+    private String lastname;
+    @Column(name="username")
+    private String username;
+    @Column(name="password")
+    private String password;
 
 	public int getId() {
 		return id;

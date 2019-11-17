@@ -4,6 +4,12 @@ CE426 World Wide Web Technologies | UTH
 
 [Web application](http://83.212.111.93:8080/estamos)
 
+# jpa branch
+
+It is provided a jpa branch which is the Hibernate JPA Layer Implementation of the web app .
+
+[Web application | Hibernate JPA Layer Implementation](http://83.212.111.93:8080/estamos_jpa)
+
 ## Note
 If the web application is not working probably the virtual machine is not running .
 

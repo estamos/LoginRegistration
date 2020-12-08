@@ -1,6 +1,5 @@
 # Web app with Login and Registration functionality
-
-CE426 World Wide Web Technologies | UTH
+> Application is no longer deployed on the following addresses since access in GRNET's cloud service | ~okeanos was given only for academic semester Fall 2019 - 2020 .
 
 [Web application](http://83.212.111.93:8080/estamos)
 
